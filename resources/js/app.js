@@ -19,13 +19,25 @@ let app_data = [],
 	formatedDates = [];
 
 // GET USERS COUNTRY CODE
-let country_code = geoplugin_countryCode();
+let country_code;
 let user_country;
-country_list.forEach( country => {
-	if( country.code == country_code ){
+
+fetch('https://ipinfo.io/?token=905e27037d596f').then(response => {
+	return response.json();
+	}).then(data =>{
+	console.log(data);
+	country_code=data.country;
+	console.log(country_code);
+	country_list.forEach( country => {
+	if( country.code === country_code ){
 		user_country = country.name;
 	}
-});
+	});
+	fetchData(user_country);
+
+}
+)
+
 
 /* ---------------------------------------------- */
 /*                API URL AND KEY                 */
@@ -67,7 +79,6 @@ function fetchData(user_country){
 	})
 }
 
-fetchData(user_country);
 
 // UPDATE UI FUNCTION
 function updateUI(){
