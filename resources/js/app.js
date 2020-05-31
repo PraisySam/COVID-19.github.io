@@ -22,11 +22,11 @@ let app_data = [],
 let country_code;
 let user_country;
 
-fetch('http://ip-api.com/json').then(response => {
+fetch('https://ipinfo.io/?token=905e27037d596f').then(response => {
 	return response.json();
 	}).then(data =>{
 	console.log(data);
-	country_code=data.countryCode;
+	country_code=data.country;
 	console.log(country_code);
 	country_list.forEach( country => {
 	if( country.code === country_code ){
